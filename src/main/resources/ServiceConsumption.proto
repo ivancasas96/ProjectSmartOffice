@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+/* This options is used to generate Java code from the file . proto, defining the Java package, the name of the Java external class and allowing
+ * the generation of separate Java files for each message and service.
+ */
+option java_multiple_files = true;
+option java_package = "com.ProjectSmartOffice";
+option java_outer_classname = "ProjectSmartOffice";
+
+package ServiceConsumption;
+
+//Service Definition
+
+// Request to get the current electricity consumption of the office
+message ConsumptionRequest {
+  // No fields needed
+  int32 consumptionValue = 1;
+  string month = 2;
+}
+
+// Response to a request for the current electricity consumption of the office
+message ConsumptionResponse {
+  // The current electricity consumption of the office in watts
+  double consumption = 1;
+}
+
+// Request to get the maximum electricity consumption of the office
+message MaxConsumptionRequest {
+	string month = 1;
+	 int32 consumptionValue =2;
+
+
+}
+
+// Response to a request for the maximum electricity consumption of the office
+message MaxConsumptionResponse {
+  // The maximum electricity consumption of the office in watts
+  double max_consumption = 1;
+}
+
+// Request to get the minimum electricity consumption of the office
+message MinConsumptionRequest {
+	string month = 1;
+	 int32 consumptionValue =2;
+
+}
+
+// Response to a request for the minimum electricity consumption of the office
+message MinConsumptionResponse {
+  // The minimum electricity consumption of the office in watts
+  double min_consumption = 1;
+}
+
+// Service for accessing smart office electricity consumption information
+service SmartOfficeElectricityService {
+  // Get the current electricity consumption of the office
+  rpc GetCurrentConsumption(ConsumptionRequest) returns (ConsumptionResponse) {}
+
+  // Get the maximum electricity consumption of the office
+  rpc GetMaxConsumption(MaxConsumptionRequest) returns (MaxConsumptionResponse) {}
+
+  // Get the minimum electricity consumption of the office
+  rpc GetMinConsumption(MinConsumptionRequest) returns (MinConsumptionResponse) {}
+}
