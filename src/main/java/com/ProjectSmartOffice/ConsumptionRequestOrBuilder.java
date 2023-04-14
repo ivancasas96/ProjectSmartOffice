@@ -12,9 +12,18 @@ public interface ConsumptionRequestOrBuilder extends
    * No fields needed
    * </pre>
    *
-   * <code>int32 consumptionValue = 1;</code>
+   * <code>string consumptionValue = 1;</code>
    */
-  int getConsumptionValue();
+  java.lang.String getConsumptionValue();
+  /**
+   * <pre>
+   * No fields needed
+   * </pre>
+   *
+   * <code>string consumptionValue = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getConsumptionValueBytes();
 
   /**
    * <code>string month = 2;</code>

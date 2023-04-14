@@ -17,6 +17,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  * <pre>
+ *Service Definition
  * Service for accessing smart office electricity consumption information
  * </pre>
  */
@@ -151,6 +152,7 @@ public final class SmartOfficeElectricityServiceGrpc {
 
   /**
    * <pre>
+   *Service Definition
    * Service for accessing smart office electricity consumption information
    * </pre>
    */
@@ -215,6 +217,7 @@ public final class SmartOfficeElectricityServiceGrpc {
 
   /**
    * <pre>
+   *Service Definition
    * Service for accessing smart office electricity consumption information
    * </pre>
    */
@@ -270,6 +273,7 @@ public final class SmartOfficeElectricityServiceGrpc {
 
   /**
    * <pre>
+   *Service Definition
    * Service for accessing smart office electricity consumption information
    * </pre>
    */
@@ -322,6 +326,7 @@ public final class SmartOfficeElectricityServiceGrpc {
 
   /**
    * <pre>
+   *Service Definition
    * Service for accessing smart office electricity consumption information
    * </pre>
    */
@@ -430,7 +435,7 @@ public final class SmartOfficeElectricityServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.getDescriptor();
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.getDescriptor();
     }
 
     @java.lang.Override

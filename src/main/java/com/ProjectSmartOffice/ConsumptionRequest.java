@@ -20,7 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ConsumptionRequest() {
-    consumptionValue_ = 0;
+    consumptionValue_ = "";
     month_ = "";
   }
 
@@ -48,9 +48,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 8: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            consumptionValue_ = input.readInt32();
+            consumptionValue_ = s;
             break;
           }
           case 18: {
@@ -80,28 +81,57 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionRequest_descriptor;
+    return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionRequest_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionRequest_fieldAccessorTable
+    return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.ProjectSmartOffice.ConsumptionRequest.class, com.ProjectSmartOffice.ConsumptionRequest.Builder.class);
   }
 
   public static final int CONSUMPTIONVALUE_FIELD_NUMBER = 1;
-  private int consumptionValue_;
+  private volatile java.lang.Object consumptionValue_;
   /**
    * <pre>
    * No fields needed
    * </pre>
    *
-   * <code>int32 consumptionValue = 1;</code>
+   * <code>string consumptionValue = 1;</code>
    */
-  public int getConsumptionValue() {
-    return consumptionValue_;
+  public java.lang.String getConsumptionValue() {
+    java.lang.Object ref = consumptionValue_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      consumptionValue_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * No fields needed
+   * </pre>
+   *
+   * <code>string consumptionValue = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getConsumptionValueBytes() {
+    java.lang.Object ref = consumptionValue_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      consumptionValue_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   public static final int MONTH_FIELD_NUMBER = 2;
@@ -152,8 +182,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (consumptionValue_ != 0) {
-      output.writeInt32(1, consumptionValue_);
+    if (!getConsumptionValueBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, consumptionValue_);
     }
     if (!getMonthBytes().isEmpty()) {
       com.google.protobuf.GeneratedMessageV3.writeString(output, 2, month_);
@@ -167,9 +197,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (consumptionValue_ != 0) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, consumptionValue_);
+    if (!getConsumptionValueBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, consumptionValue_);
     }
     if (!getMonthBytes().isEmpty()) {
       size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, month_);
@@ -190,8 +219,8 @@ private static final long serialVersionUID = 0L;
     com.ProjectSmartOffice.ConsumptionRequest other = (com.ProjectSmartOffice.ConsumptionRequest) obj;
 
     boolean result = true;
-    result = result && (getConsumptionValue()
-        == other.getConsumptionValue());
+    result = result && getConsumptionValue()
+        .equals(other.getConsumptionValue());
     result = result && getMonth()
         .equals(other.getMonth());
     result = result && unknownFields.equals(other.unknownFields);
@@ -206,7 +235,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + CONSUMPTIONVALUE_FIELD_NUMBER;
-    hash = (53 * hash) + getConsumptionValue();
+    hash = (53 * hash) + getConsumptionValue().hashCode();
     hash = (37 * hash) + MONTH_FIELD_NUMBER;
     hash = (53 * hash) + getMonth().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
@@ -317,13 +346,13 @@ private static final long serialVersionUID = 0L;
       com.ProjectSmartOffice.ConsumptionRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionRequest_descriptor;
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionRequest_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionRequest_fieldAccessorTable
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.ProjectSmartOffice.ConsumptionRequest.class, com.ProjectSmartOffice.ConsumptionRequest.Builder.class);
     }
@@ -346,7 +375,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      consumptionValue_ = 0;
+      consumptionValue_ = "";
 
       month_ = "";
 
@@ -356,7 +385,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionRequest_descriptor;
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionRequest_descriptor;
     }
 
     @java.lang.Override
@@ -426,8 +455,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ProjectSmartOffice.ConsumptionRequest other) {
       if (other == com.ProjectSmartOffice.ConsumptionRequest.getDefaultInstance()) return this;
-      if (other.getConsumptionValue() != 0) {
-        setConsumptionValue(other.getConsumptionValue());
+      if (!other.getConsumptionValue().isEmpty()) {
+        consumptionValue_ = other.consumptionValue_;
+        onChanged();
       }
       if (!other.getMonth().isEmpty()) {
         month_ = other.month_;
@@ -462,26 +492,59 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private int consumptionValue_ ;
+    private java.lang.Object consumptionValue_ = "";
     /**
      * <pre>
      * No fields needed
      * </pre>
      *
-     * <code>int32 consumptionValue = 1;</code>
+     * <code>string consumptionValue = 1;</code>
      */
-    public int getConsumptionValue() {
-      return consumptionValue_;
+    public java.lang.String getConsumptionValue() {
+      java.lang.Object ref = consumptionValue_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        consumptionValue_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
      * <pre>
      * No fields needed
      * </pre>
      *
-     * <code>int32 consumptionValue = 1;</code>
+     * <code>string consumptionValue = 1;</code>
      */
-    public Builder setConsumptionValue(int value) {
-      
+    public com.google.protobuf.ByteString
+        getConsumptionValueBytes() {
+      java.lang.Object ref = consumptionValue_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        consumptionValue_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * No fields needed
+     * </pre>
+     *
+     * <code>string consumptionValue = 1;</code>
+     */
+    public Builder setConsumptionValue(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
       consumptionValue_ = value;
       onChanged();
       return this;
@@ -491,11 +554,29 @@ private static final long serialVersionUID = 0L;
      * No fields needed
      * </pre>
      *
-     * <code>int32 consumptionValue = 1;</code>
+     * <code>string consumptionValue = 1;</code>
      */
     public Builder clearConsumptionValue() {
       
-      consumptionValue_ = 0;
+      consumptionValue_ = getDefaultInstance().getConsumptionValue();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * No fields needed
+     * </pre>
+     *
+     * <code>string consumptionValue = 1;</code>
+     */
+    public Builder setConsumptionValueBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      consumptionValue_ = value;
       onChanged();
       return this;
     }

@@ -12,7 +12,16 @@ public interface MaxConsumptionResponseOrBuilder extends
    * The maximum electricity consumption of the office in watts
    * </pre>
    *
-   * <code>double max_consumption = 1;</code>
+   * <code>string max_consumption = 1;</code>
    */
-  double getMaxConsumption();
+  java.lang.String getMaxConsumption();
+  /**
+   * <pre>
+   * The maximum electricity consumption of the office in watts
+   * </pre>
+   *
+   * <code>string max_consumption = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getMaxConsumptionBytes();
 }

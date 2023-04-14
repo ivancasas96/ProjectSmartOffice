@@ -20,7 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private MinConsumptionResponse() {
-    minConsumption_ = 0D;
+    minConsumption_ = "";
   }
 
   @java.lang.Override
@@ -47,9 +47,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 9: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            minConsumption_ = input.readDouble();
+            minConsumption_ = s;
             break;
           }
           default: {
@@ -73,28 +74,57 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_MinConsumptionResponse_descriptor;
+    return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_MinConsumptionResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_MinConsumptionResponse_fieldAccessorTable
+    return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_MinConsumptionResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.ProjectSmartOffice.MinConsumptionResponse.class, com.ProjectSmartOffice.MinConsumptionResponse.Builder.class);
   }
 
   public static final int MIN_CONSUMPTION_FIELD_NUMBER = 1;
-  private double minConsumption_;
+  private volatile java.lang.Object minConsumption_;
   /**
    * <pre>
    * The minimum electricity consumption of the office in watts
    * </pre>
    *
-   * <code>double min_consumption = 1;</code>
+   * <code>string min_consumption = 1;</code>
    */
-  public double getMinConsumption() {
-    return minConsumption_;
+  public java.lang.String getMinConsumption() {
+    java.lang.Object ref = minConsumption_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      minConsumption_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The minimum electricity consumption of the office in watts
+   * </pre>
+   *
+   * <code>string min_consumption = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getMinConsumptionBytes() {
+    java.lang.Object ref = minConsumption_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      minConsumption_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -111,8 +141,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (minConsumption_ != 0D) {
-      output.writeDouble(1, minConsumption_);
+    if (!getMinConsumptionBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, minConsumption_);
     }
     unknownFields.writeTo(output);
   }
@@ -123,9 +153,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (minConsumption_ != 0D) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(1, minConsumption_);
+    if (!getMinConsumptionBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, minConsumption_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -143,10 +172,8 @@ private static final long serialVersionUID = 0L;
     com.ProjectSmartOffice.MinConsumptionResponse other = (com.ProjectSmartOffice.MinConsumptionResponse) obj;
 
     boolean result = true;
-    result = result && (
-        java.lang.Double.doubleToLongBits(getMinConsumption())
-        == java.lang.Double.doubleToLongBits(
-            other.getMinConsumption()));
+    result = result && getMinConsumption()
+        .equals(other.getMinConsumption());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -159,8 +186,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + MIN_CONSUMPTION_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getMinConsumption()));
+    hash = (53 * hash) + getMinConsumption().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -269,13 +295,13 @@ private static final long serialVersionUID = 0L;
       com.ProjectSmartOffice.MinConsumptionResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_MinConsumptionResponse_descriptor;
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_MinConsumptionResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_MinConsumptionResponse_fieldAccessorTable
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_MinConsumptionResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.ProjectSmartOffice.MinConsumptionResponse.class, com.ProjectSmartOffice.MinConsumptionResponse.Builder.class);
     }
@@ -298,7 +324,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      minConsumption_ = 0D;
+      minConsumption_ = "";
 
       return this;
     }
@@ -306,7 +332,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_MinConsumptionResponse_descriptor;
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_MinConsumptionResponse_descriptor;
     }
 
     @java.lang.Override
@@ -375,8 +401,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ProjectSmartOffice.MinConsumptionResponse other) {
       if (other == com.ProjectSmartOffice.MinConsumptionResponse.getDefaultInstance()) return this;
-      if (other.getMinConsumption() != 0D) {
-        setMinConsumption(other.getMinConsumption());
+      if (!other.getMinConsumption().isEmpty()) {
+        minConsumption_ = other.minConsumption_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -407,26 +434,59 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private double minConsumption_ ;
+    private java.lang.Object minConsumption_ = "";
     /**
      * <pre>
      * The minimum electricity consumption of the office in watts
      * </pre>
      *
-     * <code>double min_consumption = 1;</code>
+     * <code>string min_consumption = 1;</code>
      */
-    public double getMinConsumption() {
-      return minConsumption_;
+    public java.lang.String getMinConsumption() {
+      java.lang.Object ref = minConsumption_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        minConsumption_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
      * <pre>
      * The minimum electricity consumption of the office in watts
      * </pre>
      *
-     * <code>double min_consumption = 1;</code>
+     * <code>string min_consumption = 1;</code>
      */
-    public Builder setMinConsumption(double value) {
-      
+    public com.google.protobuf.ByteString
+        getMinConsumptionBytes() {
+      java.lang.Object ref = minConsumption_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        minConsumption_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The minimum electricity consumption of the office in watts
+     * </pre>
+     *
+     * <code>string min_consumption = 1;</code>
+     */
+    public Builder setMinConsumption(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
       minConsumption_ = value;
       onChanged();
       return this;
@@ -436,11 +496,29 @@ private static final long serialVersionUID = 0L;
      * The minimum electricity consumption of the office in watts
      * </pre>
      *
-     * <code>double min_consumption = 1;</code>
+     * <code>string min_consumption = 1;</code>
      */
     public Builder clearMinConsumption() {
       
-      minConsumption_ = 0D;
+      minConsumption_ = getDefaultInstance().getMinConsumption();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The minimum electricity consumption of the office in watts
+     * </pre>
+     *
+     * <code>string min_consumption = 1;</code>
+     */
+    public Builder setMinConsumptionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      minConsumption_ = value;
       onChanged();
       return this;
     }

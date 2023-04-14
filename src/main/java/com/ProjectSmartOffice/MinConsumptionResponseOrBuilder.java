@@ -12,7 +12,16 @@ public interface MinConsumptionResponseOrBuilder extends
    * The minimum electricity consumption of the office in watts
    * </pre>
    *
-   * <code>double min_consumption = 1;</code>
+   * <code>string min_consumption = 1;</code>
    */
-  double getMinConsumption();
+  java.lang.String getMinConsumption();
+  /**
+   * <pre>
+   * The minimum electricity consumption of the office in watts
+   * </pre>
+   *
+   * <code>string min_consumption = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getMinConsumptionBytes();
 }

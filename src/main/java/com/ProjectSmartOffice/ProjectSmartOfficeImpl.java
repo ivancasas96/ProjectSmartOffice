@@ -3,8 +3,8 @@
 
 package com.ProjectSmartOffice;
 
-public final class ProjectSmartOffice {
-  private ProjectSmartOffice() {}
+public final class ProjectSmartOfficeImpl {
+  private ProjectSmartOfficeImpl() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -55,14 +55,14 @@ public final class ProjectSmartOffice {
     java.lang.String[] descriptorData = {
       "\n\030ServiceConsumption.proto\022\022ServiceConsu" +
       "mption\"=\n\022ConsumptionRequest\022\030\n\020consumpt" +
-      "ionValue\030\001 \001(\005\022\r\n\005month\030\002 \001(\t\"*\n\023Consump" +
-      "tionResponse\022\023\n\013consumption\030\001 \001(\001\"@\n\025Max" +
+      "ionValue\030\001 \001(\t\022\r\n\005month\030\002 \001(\t\"*\n\023Consump" +
+      "tionResponse\022\023\n\013consumption\030\001 \001(\t\"@\n\025Max" +
       "ConsumptionRequest\022\r\n\005month\030\001 \001(\t\022\030\n\020con" +
-      "sumptionValue\030\002 \001(\005\"1\n\026MaxConsumptionRes" +
-      "ponse\022\027\n\017max_consumption\030\001 \001(\001\"@\n\025MinCon" +
+      "sumptionValue\030\002 \001(\t\"1\n\026MaxConsumptionRes" +
+      "ponse\022\027\n\017max_consumption\030\001 \001(\t\"@\n\025MinCon" +
       "sumptionRequest\022\r\n\005month\030\001 \001(\t\022\030\n\020consum" +
-      "ptionValue\030\002 \001(\005\"1\n\026MinConsumptionRespon" +
-      "se\022\027\n\017min_consumption\030\001 \001(\0012\347\002\n\035SmartOff" +
+      "ptionValue\030\002 \001(\t\"1\n\026MinConsumptionRespon" +
+      "se\022\027\n\017min_consumption\030\001 \001(\t2\347\002\n\035SmartOff" +
       "iceElectricityService\022j\n\025GetCurrentConsu" +
       "mption\022&.ServiceConsumption.ConsumptionR" +
       "equest\032\'.ServiceConsumption.ConsumptionR" +
@@ -71,9 +71,9 @@ public final class ProjectSmartOffice {
       "iceConsumption.MaxConsumptionResponse\"\000\022" +
       "l\n\021GetMinConsumption\022).ServiceConsumptio" +
       "n.MinConsumptionRequest\032*.ServiceConsump" +
-      "tion.MinConsumptionResponse\"\000B.\n\026com.Pro" +
-      "jectSmartOfficeB\022ProjectSmartOfficeP\001b\006p" +
-      "roto3"
+      "tion.MinConsumptionResponse\"\000B2\n\026com.Pro" +
+      "jectSmartOfficeB\026ProjectSmartOfficeImplP" +
+      "\001b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

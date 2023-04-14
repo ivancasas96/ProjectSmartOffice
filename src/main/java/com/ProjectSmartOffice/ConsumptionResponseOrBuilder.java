@@ -12,7 +12,16 @@ public interface ConsumptionResponseOrBuilder extends
    * The current electricity consumption of the office in watts
    * </pre>
    *
-   * <code>double consumption = 1;</code>
+   * <code>string consumption = 1;</code>
    */
-  double getConsumption();
+  java.lang.String getConsumption();
+  /**
+   * <pre>
+   * The current electricity consumption of the office in watts
+   * </pre>
+   *
+   * <code>string consumption = 1;</code>
+   */
+  com.google.protobuf.ByteString
+      getConsumptionBytes();
 }

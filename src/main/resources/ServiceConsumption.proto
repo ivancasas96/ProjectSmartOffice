@@ -5,52 +5,11 @@ syntax = "proto3";
  */
 option java_multiple_files = true;
 option java_package = "com.ProjectSmartOffice";
-option java_outer_classname = "ProjectSmartOffice";
+option java_outer_classname = "ProjectSmartOfficeImpl";
 
 package ServiceConsumption;
 
 //Service Definition
-
-// Request to get the current electricity consumption of the office
-message ConsumptionRequest {
-  // No fields needed
-  int32 consumptionValue = 1;
-  string month = 2;
-}
-
-// Response to a request for the current electricity consumption of the office
-message ConsumptionResponse {
-  // The current electricity consumption of the office in watts
-  double consumption = 1;
-}
-
-// Request to get the maximum electricity consumption of the office
-message MaxConsumptionRequest {
-	string month = 1;
-	 int32 consumptionValue =2;
-
-
-}
-
-// Response to a request for the maximum electricity consumption of the office
-message MaxConsumptionResponse {
-  // The maximum electricity consumption of the office in watts
-  double max_consumption = 1;
-}
-
-// Request to get the minimum electricity consumption of the office
-message MinConsumptionRequest {
-	string month = 1;
-	 int32 consumptionValue =2;
-
-}
-
-// Response to a request for the minimum electricity consumption of the office
-message MinConsumptionResponse {
-  // The minimum electricity consumption of the office in watts
-  double min_consumption = 1;
-}
-
 // Service for accessing smart office electricity consumption information
 service SmartOfficeElectricityService {
   // Get the current electricity consumption of the office
@@ -62,3 +21,44 @@ service SmartOfficeElectricityService {
   // Get the minimum electricity consumption of the office
   rpc GetMinConsumption(MinConsumptionRequest) returns (MinConsumptionResponse) {}
 }
+
+// Request to get the current electricity consumption of the office
+message ConsumptionRequest {
+  // No fields needed
+  string consumptionValue = 1;
+  string month = 2;
+}
+
+// Response to a request for the current electricity consumption of the office
+message ConsumptionResponse {
+  // The current electricity consumption of the office in watts
+  string consumption = 1;
+}
+
+// Request to get the maximum electricity consumption of the office
+message MaxConsumptionRequest {
+	string month = 1;
+	 string consumptionValue =2;
+
+
+}
+
+// Response to a request for the maximum electricity consumption of the office
+message MaxConsumptionResponse {
+  // The maximum electricity consumption of the office in watts
+  string max_consumption = 1;
+}
+
+// Request to get the minimum electricity consumption of the office
+message MinConsumptionRequest {
+	string month = 1;
+	 string consumptionValue =2;
+
+}
+
+// Response to a request for the minimum electricity consumption of the office
+message MinConsumptionResponse {
+  // The minimum electricity consumption of the office in watts
+  string min_consumption = 1;
+}
+

@@ -20,7 +20,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private ConsumptionResponse() {
-    consumption_ = 0D;
+    consumption_ = "";
   }
 
   @java.lang.Override
@@ -47,9 +47,10 @@ private static final long serialVersionUID = 0L;
           case 0:
             done = true;
             break;
-          case 9: {
+          case 10: {
+            java.lang.String s = input.readStringRequireUtf8();
 
-            consumption_ = input.readDouble();
+            consumption_ = s;
             break;
           }
           default: {
@@ -73,28 +74,57 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionResponse_descriptor;
+    return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionResponse_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionResponse_fieldAccessorTable
+    return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionResponse_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
             com.ProjectSmartOffice.ConsumptionResponse.class, com.ProjectSmartOffice.ConsumptionResponse.Builder.class);
   }
 
   public static final int CONSUMPTION_FIELD_NUMBER = 1;
-  private double consumption_;
+  private volatile java.lang.Object consumption_;
   /**
    * <pre>
    * The current electricity consumption of the office in watts
    * </pre>
    *
-   * <code>double consumption = 1;</code>
+   * <code>string consumption = 1;</code>
    */
-  public double getConsumption() {
-    return consumption_;
+  public java.lang.String getConsumption() {
+    java.lang.Object ref = consumption_;
+    if (ref instanceof java.lang.String) {
+      return (java.lang.String) ref;
+    } else {
+      com.google.protobuf.ByteString bs = 
+          (com.google.protobuf.ByteString) ref;
+      java.lang.String s = bs.toStringUtf8();
+      consumption_ = s;
+      return s;
+    }
+  }
+  /**
+   * <pre>
+   * The current electricity consumption of the office in watts
+   * </pre>
+   *
+   * <code>string consumption = 1;</code>
+   */
+  public com.google.protobuf.ByteString
+      getConsumptionBytes() {
+    java.lang.Object ref = consumption_;
+    if (ref instanceof java.lang.String) {
+      com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString.copyFromUtf8(
+              (java.lang.String) ref);
+      consumption_ = b;
+      return b;
+    } else {
+      return (com.google.protobuf.ByteString) ref;
+    }
   }
 
   private byte memoizedIsInitialized = -1;
@@ -111,8 +141,8 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (consumption_ != 0D) {
-      output.writeDouble(1, consumption_);
+    if (!getConsumptionBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, consumption_);
     }
     unknownFields.writeTo(output);
   }
@@ -123,9 +153,8 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (consumption_ != 0D) {
-      size += com.google.protobuf.CodedOutputStream
-        .computeDoubleSize(1, consumption_);
+    if (!getConsumptionBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, consumption_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -143,10 +172,8 @@ private static final long serialVersionUID = 0L;
     com.ProjectSmartOffice.ConsumptionResponse other = (com.ProjectSmartOffice.ConsumptionResponse) obj;
 
     boolean result = true;
-    result = result && (
-        java.lang.Double.doubleToLongBits(getConsumption())
-        == java.lang.Double.doubleToLongBits(
-            other.getConsumption()));
+    result = result && getConsumption()
+        .equals(other.getConsumption());
     result = result && unknownFields.equals(other.unknownFields);
     return result;
   }
@@ -159,8 +186,7 @@ private static final long serialVersionUID = 0L;
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
     hash = (37 * hash) + CONSUMPTION_FIELD_NUMBER;
-    hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        java.lang.Double.doubleToLongBits(getConsumption()));
+    hash = (53 * hash) + getConsumption().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -269,13 +295,13 @@ private static final long serialVersionUID = 0L;
       com.ProjectSmartOffice.ConsumptionResponseOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionResponse_descriptor;
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionResponse_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionResponse_fieldAccessorTable
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionResponse_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.ProjectSmartOffice.ConsumptionResponse.class, com.ProjectSmartOffice.ConsumptionResponse.Builder.class);
     }
@@ -298,7 +324,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      consumption_ = 0D;
+      consumption_ = "";
 
       return this;
     }
@@ -306,7 +332,7 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return com.ProjectSmartOffice.ProjectSmartOffice.internal_static_ServiceConsumption_ConsumptionResponse_descriptor;
+      return com.ProjectSmartOffice.ProjectSmartOfficeImpl.internal_static_ServiceConsumption_ConsumptionResponse_descriptor;
     }
 
     @java.lang.Override
@@ -375,8 +401,9 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.ProjectSmartOffice.ConsumptionResponse other) {
       if (other == com.ProjectSmartOffice.ConsumptionResponse.getDefaultInstance()) return this;
-      if (other.getConsumption() != 0D) {
-        setConsumption(other.getConsumption());
+      if (!other.getConsumption().isEmpty()) {
+        consumption_ = other.consumption_;
+        onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -407,26 +434,59 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private double consumption_ ;
+    private java.lang.Object consumption_ = "";
     /**
      * <pre>
      * The current electricity consumption of the office in watts
      * </pre>
      *
-     * <code>double consumption = 1;</code>
+     * <code>string consumption = 1;</code>
      */
-    public double getConsumption() {
-      return consumption_;
+    public java.lang.String getConsumption() {
+      java.lang.Object ref = consumption_;
+      if (!(ref instanceof java.lang.String)) {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        consumption_ = s;
+        return s;
+      } else {
+        return (java.lang.String) ref;
+      }
     }
     /**
      * <pre>
      * The current electricity consumption of the office in watts
      * </pre>
      *
-     * <code>double consumption = 1;</code>
+     * <code>string consumption = 1;</code>
      */
-    public Builder setConsumption(double value) {
-      
+    public com.google.protobuf.ByteString
+        getConsumptionBytes() {
+      java.lang.Object ref = consumption_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        consumption_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    /**
+     * <pre>
+     * The current electricity consumption of the office in watts
+     * </pre>
+     *
+     * <code>string consumption = 1;</code>
+     */
+    public Builder setConsumption(
+        java.lang.String value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  
       consumption_ = value;
       onChanged();
       return this;
@@ -436,11 +496,29 @@ private static final long serialVersionUID = 0L;
      * The current electricity consumption of the office in watts
      * </pre>
      *
-     * <code>double consumption = 1;</code>
+     * <code>string consumption = 1;</code>
      */
     public Builder clearConsumption() {
       
-      consumption_ = 0D;
+      consumption_ = getDefaultInstance().getConsumption();
+      onChanged();
+      return this;
+    }
+    /**
+     * <pre>
+     * The current electricity consumption of the office in watts
+     * </pre>
+     *
+     * <code>string consumption = 1;</code>
+     */
+    public Builder setConsumptionBytes(
+        com.google.protobuf.ByteString value) {
+      if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+      
+      consumption_ = value;
       onChanged();
       return this;
     }

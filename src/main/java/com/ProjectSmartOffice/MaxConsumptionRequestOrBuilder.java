@@ -18,7 +18,12 @@ public interface MaxConsumptionRequestOrBuilder extends
       getMonthBytes();
 
   /**
-   * <code>int32 consumptionValue = 2;</code>
+   * <code>string consumptionValue = 2;</code>
    */
-  int getConsumptionValue();
+  java.lang.String getConsumptionValue();
+  /**
+   * <code>string consumptionValue = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getConsumptionValueBytes();
 }
