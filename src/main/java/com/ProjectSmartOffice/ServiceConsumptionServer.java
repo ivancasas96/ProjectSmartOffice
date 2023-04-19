@@ -22,7 +22,7 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 	
 		try {
 			server = ServerBuilder.forPort(port).addService(SmartOfficeElectricityService).build().start();
-			System.out.println("Server started..");
+			System.out.println("Consumption Server started..");
 			server.awaitTermination();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

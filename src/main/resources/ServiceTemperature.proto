@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+// Generate a java code
+
+option java_multiple_files = true;
+option java_package = "com.ProjectSmartOffice2";
+option java_outer_classname = "ProjectSmartOfficeImpl";
+
+package ServiceTemperature;
+
+// Service Definition
+// Service to access to the temperature information from the office
+service SmartOfficeTemperatureService{
+	// Get the current temperature in the office
+	rpc StreamTemperatures(TemperatureRequest) returns (stream TemperatureResponse) {}
+	// Calculate the average temperature in the office
+	rpc GetTemperature(stream TemperatureAverageRequest) returns (TemperatureAverageResponse) {}
+	// Determine if a series of temperature readings are within a specified range
+	rpc CheckTemperatureRange(stream TemperatureRangeRequest) returns (TemperatureRangeResponse) {}
+
+}
+
+//Request to get the temperature in the office
+message TemperatureRequest{
+	string trequest = 1;
+}
+
+//Response a single temperature reading
+message TemperatureResponse{
+	string morningtemperature = 1;
+	string afternoontemperature = 2;
+}
+
+//Request containing a series of temperature readings to calculate the average temperature
+message TemperatureAverageRequest{
+	double temperatures = 1;
+	double temperatures2 = 2;
+	double temperatures3 = 3;
+
+}
+
+//Response containing the average temperature of the readings
+message TemperatureAverageResponse{
+	double average_temperature =2;
+
+}
+
+// Request containing a series of temperature readings to determine if the temperature is within a specified range
+message TemperatureRangeRequest {
+  	// A stream of temperature readings in degrees Celsius
+  	double rangetemperatures = 1;
+
+  	// The lower bound of the temperature range in degrees Celsius
+  	double lower_range = 2;
+
+ 	// The upper bound of the temperature range in degrees Celsius
+  	double upper_range = 3;
+}
+
+// Response indicating whether the temperature readings are within the specified range
+message TemperatureRangeResponse {
+  // True if the temperature readings are within the specified range, false otherwise
+  bool range = 1;
+}
+
+
+
+
