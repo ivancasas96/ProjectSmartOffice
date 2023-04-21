@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+//Generate code
+option java_multiple_files = true;
+option java_package = "com.ProjectSmartOffice3";
+option java_outer_classname = "ProjectSmartOfficeImpl";
+
+package ServiceLight;
+
+// Service Definition
+service SmartOfficeLightService{
+  //Unary RPC to set the  lights in a room
+  rpc SetRoomLight(SetLightRequest) returns (SetLightResponse) {}
+
+  // Unary RPC to set the temperature of a room
+  rpc SetRoomTemperature(SetTemperatureRequest) returns (SetTemperatureResponse) {}
+
+  // Bidirectional RPC to control the lights in a room
+  rpc ControlRoomLight(stream RoomLightRequest) returns (stream RoomLightResponse) {}
+}
+
+ //Request to get the state of the light in a room
+message SetLightRequest {
+  string room_id = 1;
+
+}
+message SetLightResponse {
+  string light = 1;
+}
+
+// Request to change the temperature for a room
+message SetTemperatureRequest {
+  string room = 1;
+  string temperature = 2;
+}
+
+message SetTemperatureResponse {
+  string room = 1;
+  string temperature = 2;
+}
+
+ // Bidirectional RPC to control the lights
+ message RoomLightRequest {
+  string rooms = 1;
+  string light_state = 2;
+}
+
+message RoomLightResponse {
+  string rooms = 1;
+  string light_state = 2;
+}
+
+
+
+

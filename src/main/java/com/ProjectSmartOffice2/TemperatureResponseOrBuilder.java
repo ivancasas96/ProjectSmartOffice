@@ -8,12 +8,22 @@ public interface TemperatureResponseOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>string temperature = 20;</code>
+   * <code>string morningtemperature = 1;</code>
    */
-  java.lang.String getTemperature();
+  java.lang.String getMorningtemperature();
   /**
-   * <code>string temperature = 20;</code>
+   * <code>string morningtemperature = 1;</code>
    */
   com.google.protobuf.ByteString
-      getTemperatureBytes();
+      getMorningtemperatureBytes();
+
+  /**
+   * <code>string afternoontemperature = 2;</code>
+   */
+  java.lang.String getAfternoontemperature();
+  /**
+   * <code>string afternoontemperature = 2;</code>
+   */
+  com.google.protobuf.ByteString
+      getAfternoontemperatureBytes();
 }

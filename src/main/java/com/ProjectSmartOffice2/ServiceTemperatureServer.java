@@ -35,7 +35,7 @@ public class ServiceTemperatureServer extends SmartOfficeTemperatureServiceImplB
 	    String tRequest = request.getTrequest();
 	    
 	        responseObserver.onNext(TemperatureResponse.newBuilder()
-	        		.setTemperature("The morning temperature is: " + morningtemperature + 
+	        		.setAfternoontemperature("The morning temperature is: " + morningtemperature + 
 	                		"The afternoon temperature is:" + afternoontemperature).build());
 	    
 	    responseObserver.onCompleted();
