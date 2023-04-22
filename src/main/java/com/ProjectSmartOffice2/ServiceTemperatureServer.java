@@ -142,6 +142,7 @@ public class ServiceTemperatureServer extends SmartOfficeTemperatureServiceImplB
 		};
 }
 
+	//Client Streaming
 	@Override
 	public StreamObserver<TemperatureRangeRequest> checkTemperatureRange(StreamObserver<TemperatureRangeResponse> responseObserver) {
 	    
@@ -151,7 +152,7 @@ public class ServiceTemperatureServer extends SmartOfficeTemperatureServiceImplB
 	            System.out.println("Receiving the Range " + value.getRangetemperatures() + " " + value.getLowerRange() + " " + value.getUpperRange());
 	            boolean withinRange = false;
 	             
-	                if ( value.getRangetemperatures() < value.getLowerRange() && value.getRangetemperatures() > value.getUpperRange()) {
+	                if ( value.getRangetemperatures() > value.getLowerRange() && value.getRangetemperatures() < value.getUpperRange()) {
 	                    withinRange = true;
 	      
 	                }
