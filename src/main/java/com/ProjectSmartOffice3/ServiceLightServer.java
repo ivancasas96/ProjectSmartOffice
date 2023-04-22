@@ -66,7 +66,7 @@ public class ServiceLightServer extends SmartOfficeLightServiceImplBase {
 		
 	private void registerService3(Properties prop) {
 		try {
-			//Create a JmDNS instance
+			//JmDNS
 						JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
 						String service_type = prop.getProperty("service_type");
@@ -75,14 +75,14 @@ public class ServiceLightServer extends SmartOfficeLightServiceImplBase {
 						int service_port = Integer.valueOf(prop.getProperty("service_port"));
 						String service_description_properties = prop.getProperty("service_description");
 
-			//Register a service
+			//Service registration
 						ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port,
 								service_description_properties);
 						jmdns.registerService(serviceInfo);
 
 						System.out.printf("Registering the service type %s with the name %s \n", service_type, service_name);
 
-			//Wait a 1 second
+			//Waiting
 						Thread.sleep(500);
 
 					} catch (IOException e) {
@@ -117,17 +117,17 @@ public class ServiceLightServer extends SmartOfficeLightServiceImplBase {
 		
 	}
 
+	// Bidirectional streaming
 	@Override
 	public StreamObserver<RoomLightRequest> controlRoomLight(StreamObserver<RoomLightResponse> responseObserver) {
 	    StreamObserver<RoomLightRequest> requestObserver = new StreamObserver <RoomLightRequest>() {
 
 	        @Override
 	        public void onNext(RoomLightRequest value) {
-	            // In bidirectional stream, both server and client would be sending the stream of messages.
-	            // Here, for each message in stream from client, server is sending back one response.
+	            
 	            String response = "The room light is turned ON, " + value.getLightState() + " Thank you";
 
-	            // Preparing and sending the reply for the client. Here, response is built with the value (input1.toString()) computed by above logic.
+	            // Preparing and sending the reply for the client
 	            RoomLightResponse response1 = RoomLightResponse.newBuilder().setLightState(response).build();
 
 	            responseObserver.onNext(response1);

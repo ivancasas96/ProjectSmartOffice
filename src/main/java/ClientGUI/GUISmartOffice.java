@@ -15,14 +15,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.ProjectSmartOffice.SmartOfficeElectricityServiceGrpc;
+import com.ProjectSmartOffice.SmartOfficeElectricityServiceGrpc.SmartOfficeElectricityServiceBlockingStub;
 import com.ProjectSmartOffice2.SmartOfficeTemperatureServiceGrpc;
+import com.ProjectSmartOffice2.TemperatureRequest;
+import com.ProjectSmartOffice3.RoomLightResponse;
+import com.ProjectSmartOffice3.SetLightResponse;
 import com.ProjectSmartOffice3.SmartOfficeLightServiceGrpc;
 
-import ds.client.ControllerGUI;
-import ds.service1.Service1Grpc;
-import ds.service2.Service2Grpc;
-import ds.service3.Service3Grpc;
-import ds.service4.Service4Grpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
@@ -117,43 +116,17 @@ public class GUISmartOffice implements ActionListener {
 
 	}
 
-	private JPanel getService4JPanel() {
-
-		JPanel panel = new JPanel();
-
-		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
-
-		JLabel label = new JLabel("Enter value")	;
-		panel.add(label);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
-		entry4 = new JTextField("",10);
-		panel.add(entry4);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
-
-		JButton button = new JButton("Invoke Service 4");
-		button.addActionListener(this);
-		panel.add(button);
-		panel.add(Box.createRigidArea(new Dimension(10, 0)));
-
-		reply4 = new JTextField("", 10);
-		reply4 .setEditable(false);
-		panel.add(reply4 );
-
-		panel.setLayout(boxlayout);
-
-		return panel;
-
-	}
+	
 	public static void main(String[] args) {
 
-		ControllerGUI gui = new ControllerGUI();
+		GUISmartOffice gui = new GUISmartOffice();
 
 		gui.build();
 	}
 
 	private void build() { 
 
-		JFrame frame = new JFrame("Service Controller Sample");
+		JFrame frame = new JFrame("Smart Office Service");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Set the panel to add buttons
@@ -170,7 +143,6 @@ public class GUISmartOffice implements ActionListener {
 		panel.add( getService1JPanel() );
 		panel.add( getService2JPanel() );
 		panel.add( getService3JPanel() );
-		panel.add( getService4JPanel() );
 
 		// Set size for the frame
 		frame.setSize(300, 300);
@@ -195,15 +167,16 @@ public class GUISmartOffice implements ActionListener {
 			 * 
 			 */
 			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-			Service1Grpc.Service1BlockingStub blockingStub = Service1Grpc.newBlockingStub(channel);
+			SmartOfficeElectricityServiceGrpc.SmartOfficeElectricityServiceBlockingStub blockingStub =
+					SmartOfficeElectricityServiceGrpc.newBlockingStub(channel);
 
 			//preparing message to send
-			ds.service1.RequestMessage request = ds.service1.RequestMessage.newBuilder().setText(entry1.getText()).build();
+			com.ProjectSmartOffice.ConsumptionRequest request = com.ProjectSmartOffice.ConsumptionRequest.newBuilder().setConsumptionValue(entry1.getText()).build();
 
 			//retreving reply from service
-			ds.service1.ResponseMessage response = blockingStub.service1Do(request);
+			com.ProjectSmartOffice.ConsumptionResponse response = blockingStub.getCurrentConsumption(request);
 
-			reply1.setText( String.valueOf( response.getLength()) );
+			reply1.setText( String.valueOf( response.getConsumption()) );
 		
 		}else if (label.equals("Invoke Service 2")) {
 			System.out.println("service 2 to be invoked ...");
@@ -213,15 +186,16 @@ public class GUISmartOffice implements ActionListener {
 			 * 
 			 */
 			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
-			Service2Grpc.Service2BlockingStub blockingStub = Service2Grpc.newBlockingStub(channel);
+			SmartOfficeTemperatureServiceGrpc.SmartOfficeTemperatureServiceBlockingStub blockingStub =
+					SmartOfficeTemperatureServiceGrpc.newBlockingStub(channel);
 
 			//preparing message to send
-			ds.service2.RequestMessage request = ds.service2.RequestMessage.newBuilder().setText(entry2.getText()).build();
+			//TemperatureRequest request = com.ProjectSmartOffice2.TemperatureAverageRequest.newBuilder().setTemperatures2(entry2.getText()).build();
 
 			//retreving reply from service
-			ds.service2.ResponseMessage response = blockingStub.service2Do(request);
+			//com.ProjectSmartOffice2.TemperatureAverageResponse response = blockingStub.streamTemperatures(request);
 
-			reply2.setText( String.valueOf( response.getLength()) );
+			//reply2.setText( String.valueOf( response.getAverageTemperature()) );
 			
 		}else if (label.equals("Invoke Service 3")) {
 			System.out.println("service 3 to be invoked ...");
@@ -231,20 +205,26 @@ public class GUISmartOffice implements ActionListener {
 			 * 
 			 */
 			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
-			Service3Grpc.Service3BlockingStub blockingStub = Service3Grpc.newBlockingStub(channel);
+			SmartOfficeLightServiceGrpc.SmartOfficeLightServiceBlockingStub blockingStub =
+					SmartOfficeLightServiceGrpc.newBlockingStub(channel);
 
 			//preparing message to send
-			ds.service3.RequestMessage request = ds.service3.RequestMessage.newBuilder().setText(entry3.getText()).build();
+			SetLightResponse request = com.ProjectSmartOffice3.SetLightResponse.newBuilder().setLight(entry3.getText()).build();
 
 			//retreving reply from service
-			ds.service3.ResponseMessage response = blockingStub.service3Do(request);
+			com.ProjectSmartOffice3.RoomLightResponse response = blockingStub(request);
 
-			reply3.setText( String.valueOf( response.getLength()) );
+			reply3.setText( String.valueOf( response.getLightState()) );
 		
 		}else{
 			
 		}
 
+	}
+
+	private RoomLightResponse blockingStub(SetLightResponse request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

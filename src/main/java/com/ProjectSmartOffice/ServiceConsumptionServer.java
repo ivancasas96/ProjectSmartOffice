@@ -64,7 +64,7 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 		
 	private void registerService1(Properties prop) {
 		try {
-			//Create a JmDNS instance
+			//JmDNS
 						JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
 						String service_type = prop.getProperty("service_type");
@@ -73,14 +73,13 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 						int service_port = Integer.valueOf(prop.getProperty("service_port"));
 						String service_description_properties = prop.getProperty("service_description");
 
-			//Register a service
+			//Service registration
 						ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port,
 								service_description_properties);
 						jmdns.registerService(serviceInfo);
 
 						System.out.printf("Registering the service type %s with the name %s \n", service_type, service_name);
 
-			//Wait a 1 second
 						Thread.sleep(500);
 
 					} catch (IOException e) {
@@ -102,7 +101,7 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 			StreamObserver<ConsumptionResponse> responseObserver) {
 		System.out.println("--- Receiving the actual consumption---");
 		ConsumptionResponse replay = ConsumptionResponse.newBuilder()
-				.setConsumption("The consumption is: " + request.getConsumptionValue()).build();
+				.setConsumption("The new limit consumption is: " + request.getConsumptionValue()).build();
 		responseObserver.onNext(replay);
 		responseObserver.onCompleted();
 		// TODO Auto-generated method stub
@@ -130,7 +129,7 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 		responseObserver.onNext(replay);
 		responseObserver.onCompleted();
 		// TODO Auto-generated method stub
-		//super.getMinConsumption(request, responseObserver);
+		super.getMinConsumption(request, responseObserver);
 	}
 
 

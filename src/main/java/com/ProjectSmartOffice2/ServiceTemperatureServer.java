@@ -20,7 +20,8 @@ import io.grpc.stub.StreamObserver;
 
 public class ServiceTemperatureServer extends SmartOfficeTemperatureServiceImplBase {
 	public static void main(String[] args) {
-ServiceTemperatureServer SmartOfficeTemperatureServer = new ServiceTemperatureServer();
+		
+		ServiceTemperatureServer SmartOfficeTemperatureServer = new ServiceTemperatureServer();
 		
 		Properties prop = SmartOfficeTemperatureServer.getProperties();
 		
@@ -64,7 +65,7 @@ ServiceTemperatureServer SmartOfficeTemperatureServer = new ServiceTemperatureSe
 		
 	private void registerService2(Properties prop) {
 		try {
-			//Create a JmDNS instance
+			//JmDNS 
 						JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 
 						String service_type = prop.getProperty("service_type");
@@ -73,14 +74,14 @@ ServiceTemperatureServer SmartOfficeTemperatureServer = new ServiceTemperatureSe
 						int service_port = Integer.valueOf(prop.getProperty("service_port"));
 						String service_description_properties = prop.getProperty("service_description");
 
-			//Register a service
+			//Service registration
 						ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port,
 								service_description_properties);
 						jmdns.registerService(serviceInfo);
 
 						System.out.printf("Registering the service type %s with the name %s \n", service_type, service_name);
 
-			//Wait a 1 second
+			
 						Thread.sleep(500);
 
 					} catch (IOException e) {
@@ -113,31 +114,26 @@ ServiceTemperatureServer SmartOfficeTemperatureServer = new ServiceTemperatureSe
 	public StreamObserver<TemperatureAverageRequest> getTemperature(
 			StreamObserver<TemperatureAverageResponse> responseObserver) {
 // TODO Auto-generated method stub
-// Retrieve the value from the stream of requests of the client. 
 		final double[] avg = { 0 };
 		return new StreamObserver<TemperatureAverageRequest>() {
-// For each message in the stream, get one stream at a time.
-// NOTE: YOU MAY MODIFY THE LOGIC OF onNext, onError, onCompleted BASED ON YOUR PROJECT.
-			@Override
+
+	@Override
 			public void onNext(TemperatureAverageRequest value) {
 // Here, in this example we compute the value of string length for each message in the stream. 
 				System.out.println("receiving data 1 -> " + value.getTemperatures() + " receiving data 2 " + value.getTemperatures2() + " "
 						+ value.getTemperatures3());
-// Keep on adding all the length values to compute the total length of strings sent by the client in the stream 
+// Adding all the length values to compute the total length of strings sent by the client in the stream 
 				avg[0] = (value.getTemperatures() + value.getTemperatures2() + value.getTemperatures3()) / 3;
 
 			}
 
 			@Override
 			public void onError(Throwable t) {
-// TODO Auto-generated method stub
 			}
 
-// Once the complete stream is received this logic will be executed.
 			@Override
 			public void onCompleted() {
-// Preparing and sending the reply for the client. Here, response is build and with the value (length) computed by above logic.
-// Here, response is sent once the client is done with sending the stream.
+
 				TemperatureAverageResponse res = TemperatureAverageResponse.newBuilder().setAverageTemperature(avg[0])
 						.build();
 				responseObserver.onNext(res);
@@ -168,7 +164,7 @@ ServiceTemperatureServer SmartOfficeTemperatureServer = new ServiceTemperatureSe
 
 	        @Override
 	        public void onError(Throwable t) {
-	            // Handle error
+	            // Error
 	        }
 
 	        @Override
