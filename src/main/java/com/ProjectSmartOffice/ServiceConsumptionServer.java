@@ -3,8 +3,12 @@ package com.ProjectSmartOffice;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.Properties;
 import java.util.Set;
+
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 import io.grpc.stub.StreamObserver;
 import com.ProjectSmartOffice.SmartOfficeElectricityServiceGrpc.SmartOfficeElectricityServiceImplBase;
@@ -17,11 +21,16 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 		
 		ServiceConsumptionServer SmartOfficeElectricityService = new ServiceConsumptionServer();
 		
-		int port = 50051;
-		Server server;
+		Properties prop = SmartOfficeElectricityService.getProperties();
+		
+		SmartOfficeElectricityService.registerService1(prop);
+		
+		int port = Integer.valueOf(prop.getProperty("service_port"));
+		
+		
 	
 		try {
-			server = ServerBuilder.forPort(port).addService(SmartOfficeElectricityService).build().start();
+			Server server = ServerBuilder.forPort(port).addService(SmartOfficeElectricityService).build().start();
 			System.out.println("Consumption Server started..");
 			server.awaitTermination();
 		} catch (IOException e) {
@@ -33,13 +42,59 @@ public class ServiceConsumptionServer extends SmartOfficeElectricityServiceImplB
 		}
 
 	}
+	
+	private Properties getProperties() {
+		Properties prop = null;
+		try(InputStream input = new FileInputStream("src/main/resources/serviceconsumption.properties")){
+			prop = new Properties();
+			
+			prop.load(input);
+			
+			System.out.println("Starting the server..");
+			System.out.println("\t Service: " + prop.getProperty("service_type"));
+			System.out.println("\t Service name: " + prop.getProperty("service_name"));
+			System.out.println("\t Description: " + prop.getProperty("service_description"));
+			System.out.println("\t Port: " + prop.getProperty("service_port"));
 
-	/*
-	 * private Properties getProperties() { Properties prop = null; try (InputStream
-	 * input = new
-	 * FileInputStream("src/main/resources/ServiceConsumption.properties")) { prop =
-	 * new Properties(); //load a properties file prop.load(input); }
-	 */
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return prop;
+	}
+		
+	private void registerService1(Properties prop) {
+		try {
+			//Create a JmDNS instance
+						JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+
+						String service_type = prop.getProperty("service_type");
+						String service_name = prop.getProperty("service_name");
+
+						int service_port = Integer.valueOf(prop.getProperty("service_port"));
+						String service_description_properties = prop.getProperty("service_description");
+
+			//Register a service
+						ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port,
+								service_description_properties);
+						jmdns.registerService(serviceInfo);
+
+						System.out.printf("Registering the service type %s with the name %s \n", service_type, service_name);
+
+			//Wait a 1 second
+						Thread.sleep(500);
+
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					} catch (InterruptedException e) {
+			//TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+		
+
+	
+
+	
 	// gRPC Unary
 
 	@Override

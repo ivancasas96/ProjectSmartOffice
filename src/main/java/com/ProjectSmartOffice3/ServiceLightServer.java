@@ -1,8 +1,15 @@
 package com.ProjectSmartOffice3; 
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.jmdns.JmDNS;
+import javax.jmdns.ServiceInfo;
 
 import com.ProjectSmartOffice.ServiceConsumptionServer;
 import com.ProjectSmartOffice3.SmartOfficeLightServiceGrpc.SmartOfficeLightServiceImplBase;
@@ -15,18 +22,79 @@ public class ServiceLightServer extends SmartOfficeLightServiceImplBase {
 	
 	public static void main(String[] args) {
 		
-		ServiceLightServer lightserver = new ServiceLightServer(); {
-			int port = 50053;
-			Server server;
-			try {
-				server = ServerBuilder.forPort(port).addService(lightserver).build().start();
-				System.out.println("Light server started..");
-				server.awaitTermination();
-			} catch (IOException | InterruptedException e) {
-	// TODO Auto-generated catch block
-				e.printStackTrace();
-			}}
+		ServiceLightServer SmartOfficeLightServer = new ServiceLightServer();
+		
+		Properties prop = SmartOfficeLightServer.getProperties();
+		
+		SmartOfficeLightServer.registerService3(prop);
+		
+		int port = Integer.valueOf(prop.getProperty("service_port"));
+		
+		
+		try {
+			Server server = ServerBuilder.forPort(port).addService(SmartOfficeLightServer).build().start();
+			System.out.println("Light Server started..");
+			server.awaitTermination();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
+	}
+	
+	private Properties getProperties() {
+		Properties prop = null;
+		try(InputStream input = new FileInputStream("src/main/resources/servicelight.properties")){
+			prop = new Properties();
+			
+			prop.load(input);
+			
+			System.out.println("Starting the server..");
+			System.out.println("\t Service: " + prop.getProperty("service_type"));
+			System.out.println("\t Service name: " + prop.getProperty("service_name"));
+			System.out.println("\t Description: " + prop.getProperty("service_description"));
+			System.out.println("\t Port: " + prop.getProperty("service_port"));
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return prop;
+	}
+		
+	private void registerService3(Properties prop) {
+		try {
+			//Create a JmDNS instance
+						JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+
+						String service_type = prop.getProperty("service_type");
+						String service_name = prop.getProperty("service_name");
+
+						int service_port = Integer.valueOf(prop.getProperty("service_port"));
+						String service_description_properties = prop.getProperty("service_description");
+
+			//Register a service
+						ServiceInfo serviceInfo = ServiceInfo.create(service_type, service_name, service_port,
+								service_description_properties);
+						jmdns.registerService(serviceInfo);
+
+						System.out.printf("Registering the service type %s with the name %s \n", service_type, service_name);
+
+			//Wait a 1 second
+						Thread.sleep(500);
+
+					} catch (IOException e) {
+						System.out.println(e.getMessage());
+					} catch (InterruptedException e) {
+			//TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+		
+	
+	//Unary RPC
 	
 	public void setRoomLight(SetLightRequest request, 
 			StreamObserver<SetLightResponse> responseObserver) {
